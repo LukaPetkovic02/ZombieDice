@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\green_brain.png" />
+    <None Remove="images\green_shotgun.png" />
+    <None Remove="images\green_step.png" />
+    <None Remove="images\red_brain.png" />
+    <None Remove="images\red_shotgun.png" />
+    <None Remove="images\red_step.png" />
+    <None Remove="images\yellow_brain.png" />
+    <None Remove="images\yellow_shotgun.png" />
+    <None Remove="images\yellow_step.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\green_brain.png" />
+    <Resource Include="images\green_shotgun.png" />
+    <Resource Include="images\green_step.png" />
+    <Resource Include="images\red_brain.png" />
+    <Resource Include="images\red_shotgun.png" />
+    <Resource Include="images\red_step.png" />
+    <Resource Include="images\yellow_brain.png" />
+    <Resource Include="images\yellow_shotgun.png" />
+    <Resource Include="images\yellow_step.png" />
+  </ItemGroup>
+
+</Project>
