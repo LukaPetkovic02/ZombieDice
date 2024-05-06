@@ -56,6 +56,7 @@ namespace ZombieDice.Gui
                     SwitchPlayer();
                 }
             }
+            UpdateDiceView();
         }
 
         private void BtnEndTurn_Click(object sender, RoutedEventArgs e)
@@ -78,6 +79,31 @@ namespace ZombieDice.Gui
                 GameWindow nextGameWindow = new GameWindow(_game);
                 nextGameWindow.Show();
                 Close();
+            }
+        }
+
+        private void UpdateDiceView()
+        {
+            ImgStepDice1.Source = null;
+            ImgStepDice2.Source = null;
+            ImgStepDice3.Source = null;
+            for (int i = 0; i < player.Roll.Brains.Count; i++)
+            {
+                string imageName = $"ImgBrainDice{i+1}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = player.Roll.Brains[i].DisplayDie().Source;
+            }
+            for (int i = 0; i < player.Roll.Runners.Count; i++)
+            {
+                string imageName = $"ImgStepDice{i + 1}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = player.Roll.Runners[i].DisplayDie().Source;
+            }
+            for (int i = 0; i < player.Roll.Shotguns.Count; i++)
+            {
+                string imageName = $"ImgShotgunDice{i + 1}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = player.Roll.Shotguns[i].DisplayDie().Source;
             }
         }
     }
