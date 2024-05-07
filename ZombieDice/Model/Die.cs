@@ -6,22 +6,30 @@ namespace ZombieDice.Model
 {
     public enum DIE_COLOR
     {
-        RED=0,
+        RED = 0,
         YELLOW,
         GREEN
     }
 
     public enum DIE_VALUE
     {
-        BRAIN=0,
+        BRAIN = 0,
         STEP,
         SHOTGUN
     }
-    public class Die
+    public interface IColor
+    {
+        DIE_COLOR Color { get; }
+    }
+
+    public interface IValue
+    {
+        DIE_VALUE Value { get; }
+    }
+    public class Die : IColor, IValue
     {
         public DIE_COLOR Color { get; private set; }
         public DIE_VALUE Value { get; private set; }
-        private static Random random = new Random();
         private const int NumberOfSides = 6;
 
         private static DIE_VALUE[] greenDie = { DIE_VALUE.BRAIN ,DIE_VALUE.BRAIN,DIE_VALUE.BRAIN,DIE_VALUE.STEP,DIE_VALUE.STEP,DIE_VALUE.SHOTGUN};
@@ -32,28 +40,34 @@ namespace ZombieDice.Model
             Color = color;
         }
 
-        public void Roll() // RollResult
+        public RollResult Roll()
+        {
+            DIE_VALUE rolledValue = GetRandomDieValue();
+            Value = rolledValue;
+            return new RollResult(Color, Value);
+        }
+        private DIE_VALUE GetRandomDieValue()
         {
             switch (Color)
             {
                 case DIE_COLOR.GREEN:
-                    Value = greenDie[random.Next(0, NumberOfSides)];
-                    break;
+                    return greenDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
                 case DIE_COLOR.YELLOW:
-                    Value = yellowDie[random.Next(0, NumberOfSides)];
-                    break;
+                    return yellowDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
                 case DIE_COLOR.RED:
-                    Value = redDie[random.Next(0, NumberOfSides)];
-                    break;
+                    return redDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
+                default:
+                    return DIE_VALUE.BRAIN;
             }
         }
-        
         public Image DisplayDie() // RollResult
         {
-            Image image = new Image();
-            image.Height = 50;
-            image.Width = 50;
-            image.Source = new BitmapImage(new Uri($"../../../images/{Color.ToString().ToLower()}_{Value.ToString().ToLower()}.png", UriKind.RelativeOrAbsolute));
+            Image image = new()
+            {
+                Height = 50,
+                Width = 50,
+                Source = new BitmapImage(new Uri($"../../../images/{Color.ToString().ToLower()}_{Value.ToString().ToLower()}.png", UriKind.RelativeOrAbsolute))
+            };
             return image;
         }
     }

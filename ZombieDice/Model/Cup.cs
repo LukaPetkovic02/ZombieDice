@@ -10,26 +10,10 @@ namespace ZombieDice.Model
         private const int NumGreenDice = 6;
         private const int NumYellowDice = 4;
         private const int NumRedDice = 3;
-        private static Random random = new Random(); // Singleton
 
-        public Cup() // List<Die>
+        public Cup(List<Die> Dice)
         {
-            dice = new List<Die>();
-            for (int i = 0; i < NumGreenDice; i++)
-            {
-                dice.Add(new Die(DIE_COLOR.GREEN));
-            }
-
-            for (int i = 0; i < NumYellowDice; i++)
-            {
-                dice.Add(new Die(DIE_COLOR.YELLOW));
-            }
-
-            for (int i = 0; i < NumRedDice; i++)
-            {
-                dice.Add(new Die(DIE_COLOR.RED));
-            }
-                
+            dice = Dice;
         }
         public bool EnoughDiceInCup(int numberOfDiceToDraw)
         {
@@ -38,9 +22,11 @@ namespace ZombieDice.Model
         public Die PickDie()
         {
             if (dice.Count == 0)
+            {
                 throw new InvalidOperationException("Cup is empty, cannot pick a die.");
+            }
 
-            int index = random.Next(0, dice.Count);
+            int index = RandomGenerator.Instance.Next(0, dice.Count);
             Die selected = dice.ElementAt(index);
             dice.RemoveAt(index);
             return selected;

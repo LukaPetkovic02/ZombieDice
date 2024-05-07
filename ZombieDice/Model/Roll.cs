@@ -11,13 +11,13 @@ namespace ZombieDice.Model
         public List<Die> Shotguns;
         public Cup _cup;
         public RollWindow rollWindow;
-        public Roll(Cup cup)
+        public Roll()
         {
             Brains = new List<Die>();
             Runners = new List<Die>();
             Shotguns = new List<Die>();
             BrainCount = 0;
-            _cup = cup;
+            initCup();
         }
 
         public List<Die> DrawDiceFromCup(int numberOfDiceToDraw)
@@ -36,19 +36,19 @@ namespace ZombieDice.Model
             Runners = new List<Die>();
             foreach (Die die in dice)
             {
-                die.Roll();
-                if (die.Value == DIE_VALUE.BRAIN)
+                RollResult rollResult = die.Roll();
+                if (rollResult.Value == DIE_VALUE.BRAIN)
                 {
                     BrainCount++;
                     Brains.Add(die);
                 }
 
-                if (die.Value == DIE_VALUE.STEP)
+                if (rollResult.Value == DIE_VALUE.STEP)
                 {
                     Runners.Add(die);
                 }
 
-                if (die.Value == DIE_VALUE.SHOTGUN)
+                if (rollResult.Value == DIE_VALUE.SHOTGUN)
                 {
                     Shotguns.Add(die);
                 }
@@ -68,6 +68,27 @@ namespace ZombieDice.Model
                 _cup.ReturnDiceToCup(die);
             }
             Brains.Clear();
+        }
+
+        private void initCup()
+        {
+            List<Die> dice = new List<Die>();
+            for (int i = 0; i < 6; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.GREEN));
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.YELLOW));
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.RED));
+            }
+
+            _cup = new Cup(dice);
         }
     }
 }
