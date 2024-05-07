@@ -1,13 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -36,13 +27,12 @@ namespace ZombieDice.Model
         private static DIE_VALUE[] greenDie = { DIE_VALUE.BRAIN ,DIE_VALUE.BRAIN,DIE_VALUE.BRAIN,DIE_VALUE.STEP,DIE_VALUE.STEP,DIE_VALUE.SHOTGUN};
         private static DIE_VALUE[] yellowDie = { DIE_VALUE.BRAIN, DIE_VALUE.BRAIN, DIE_VALUE.STEP, DIE_VALUE.STEP, DIE_VALUE.SHOTGUN, DIE_VALUE.SHOTGUN };
         private static DIE_VALUE[] redDie = { DIE_VALUE.BRAIN, DIE_VALUE.STEP, DIE_VALUE.STEP, DIE_VALUE.SHOTGUN, DIE_VALUE.SHOTGUN, DIE_VALUE.SHOTGUN };
-        public Die(){}
         public Die(DIE_COLOR color)
         {
             Color = color;
         }
 
-        public void Roll()
+        public void Roll() // RollResult
         {
             switch (Color)
             {
@@ -57,8 +47,8 @@ namespace ZombieDice.Model
                     break;
             }
         }
-
-        public Image DisplayDie()
+        
+        public Image DisplayDie() // RollResult
         {
             Image image = new Image();
             image.Height = 50;

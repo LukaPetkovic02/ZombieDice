@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using ZombieDice.Gui;
 
 namespace ZombieDice.Model
@@ -25,16 +20,14 @@ namespace ZombieDice.Model
             _cup = cup;
         }
 
-        public bool EnoughDiceInCup(int numberOfDiceToDraw)
-        {
-            return numberOfDiceToDraw <= _cup.Dice.Count;
-        }
         public List<Die> DrawDiceFromCup(int numberOfDiceToDraw)
         {
             List<Die> drawnDice = new List<Die>();
             for (int i = 0; i < numberOfDiceToDraw; i++)
+            {
                 drawnDice.Add(_cup.PickDie());
-
+            }
+            
             return drawnDice;
         }
 
@@ -49,10 +42,17 @@ namespace ZombieDice.Model
                     BrainCount++;
                     Brains.Add(die);
                 }
+
                 if (die.Value == DIE_VALUE.STEP)
+                {
                     Runners.Add(die);
-                if(die.Value == DIE_VALUE.SHOTGUN)
+                }
+
+                if (die.Value == DIE_VALUE.SHOTGUN)
+                {
                     Shotguns.Add(die);
+                }
+                    
             }
 
             rollWindow = new RollWindow(dice);
@@ -64,7 +64,10 @@ namespace ZombieDice.Model
         public void returnAllBrainsToCup() 
         {
             foreach (Die die in Brains)
+            {
                 _cup.ReturnDiceToCup(die);
+            }
+            Brains.Clear();
         }
     }
 }

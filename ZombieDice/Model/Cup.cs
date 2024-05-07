@@ -1,45 +1,54 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZombieDice.Model
 {
-    public class Cup
+    public sealed class Cup
     {
-        public List<Die> Dice;
+        private readonly List<Die> dice = new List<Die>();
         private const int NumGreenDice = 6;
         private const int NumYellowDice = 4;
         private const int NumRedDice = 3;
-        private static Random random = new Random();
+        private static Random random = new Random(); // Singleton
 
-        public Cup()
+        public Cup() // List<Die>
         {
-            Dice = new List<Die>();
+            dice = new List<Die>();
             for (int i = 0; i < NumGreenDice; i++)
-                Dice.Add(new Die(DIE_COLOR.GREEN));
-            for(int i = 0; i < NumYellowDice; i++)
-                Dice.Add(new Die(DIE_COLOR.YELLOW));
-            for(int i = 0; i < NumRedDice; i++)
-                Dice.Add(new Die(DIE_COLOR.RED));
-        }
+            {
+                dice.Add(new Die(DIE_COLOR.GREEN));
+            }
 
+            for (int i = 0; i < NumYellowDice; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.YELLOW));
+            }
+
+            for (int i = 0; i < NumRedDice; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.RED));
+            }
+                
+        }
+        public bool EnoughDiceInCup(int numberOfDiceToDraw)
+        {
+            return numberOfDiceToDraw <= dice.Count;
+        }
         public Die PickDie()
         {
-            if (Dice.Count == 0)
+            if (dice.Count == 0)
                 throw new InvalidOperationException("Cup is empty, cannot pick a die.");
 
-            int index = random.Next(0, Dice.Count);
-            Die selected = Dice.ElementAt(index);
-            Dice.RemoveAt(index);
+            int index = random.Next(0, dice.Count);
+            Die selected = dice.ElementAt(index);
+            dice.RemoveAt(index);
             return selected;
         }
 
         public void ReturnDiceToCup(Die die)
         {
-            Dice.Add(die);
+            dice.Add(die);
         }
 
     }

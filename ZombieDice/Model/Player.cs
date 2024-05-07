@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using ZombieDice.Gui;
+﻿using System.Collections.Generic;
 
 namespace ZombieDice.Model
 {
@@ -34,10 +27,6 @@ namespace ZombieDice.Model
             dice.AddRange(DrawDice());
 
             Roll.RollDice(dice);
-            //else if (HasPlayerCollected13Brains() && !lastTurn)
-            //{
-            //    MessageBox.Show("You have collected at least 13 brains!");
-            //}
         }
 
         public bool Lost()
@@ -48,9 +37,11 @@ namespace ZombieDice.Model
         public List<Die> DrawDice()
         {
             int diceToDraw = 3 - Roll.Runners.Count;
-            if (!Roll.EnoughDiceInCup(diceToDraw))
+            if (!Roll._cup.EnoughDiceInCup(diceToDraw))
+            {
                 Roll.returnAllBrainsToCup();
-
+            }
+            
             return Roll.DrawDiceFromCup(diceToDraw);
         }
         public void StoreBrains()
