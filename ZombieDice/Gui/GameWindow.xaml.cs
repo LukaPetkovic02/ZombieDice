@@ -16,7 +16,9 @@ namespace ZombieDice.Gui
             _game = game;
             player = _game.Players[_game.IndexTurn];
             InitializeComponent();
-            DataContext = player;
+            DataContext = _game;
+            LabelPlayerName.Content = _game.Players[_game.IndexTurn].Name;
+            LabelTotalBrains.Content = _game.Players[_game.IndexTurn].BrainCount;
         }
 
         private void BtnRoll_Click(object sender, RoutedEventArgs e)

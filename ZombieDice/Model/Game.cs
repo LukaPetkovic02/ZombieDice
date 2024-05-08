@@ -6,7 +6,7 @@ namespace ZombieDice.Model
     public class Game
     {
         public int NumOfPlayers;
-        public List<Player> Players;
+        public List<Player> Players { get; set; }
         public int IndexTurn;
         public bool LastTurn;
 
