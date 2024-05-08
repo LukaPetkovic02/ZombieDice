@@ -8,6 +8,7 @@ namespace ZombieDice.Model
     {
         public DIE_COLOR Color { get; private set; }
         public DIE_VALUE Value { get; private set; }
+        
         public RollResult(DIE_COLOR color, DIE_VALUE value)
         {
             Color = color;

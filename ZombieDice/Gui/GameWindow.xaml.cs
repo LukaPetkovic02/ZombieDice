@@ -71,9 +71,7 @@ namespace ZombieDice.Gui
 
         private void UpdateDiceView()
         {
-            ImgStepDice1.Source = null;
-            ImgStepDice2.Source = null;
-            ImgStepDice3.Source = null;
+            EmptyImages();
             for (int i = 0; i < player.Roll.Brains.Count; i++)
             {
                 string imageName = $"ImgBrainDice{i+1}";
@@ -92,6 +90,29 @@ namespace ZombieDice.Gui
                 Image image = Grid.FindName(imageName) as Image;
                 image.Source = player.Roll.Shotguns[i].DisplayDie().Source;
             }
+        }
+
+        private void EmptyImages()
+        {
+            ImgStepDice1.Source = null;
+            ImgStepDice2.Source = null;
+            ImgStepDice3.Source = null;
+            ImgBrainDice1.Source = null;
+            ImgBrainDice2.Source = null;
+            ImgBrainDice3.Source = null;
+            ImgBrainDice4.Source = null;
+            ImgBrainDice5.Source = null;
+            ImgBrainDice6.Source = null;
+            ImgBrainDice7.Source = null;
+            ImgBrainDice8.Source = null;
+            ImgBrainDice9.Source = null;
+            ImgBrainDice10.Source = null;
+            ImgBrainDice11.Source = null;
+            ImgBrainDice12.Source = null;
+            ImgBrainDice13.Source = null;
+            ImgBrainDice14.Source = null;
+            ImgBrainDice15.Source = null;
+            ImgBrainDice16.Source = null;
         }
     }
 }

@@ -9,12 +9,12 @@ namespace ZombieDice.Gui
     /// </summary>
     public partial class RollWindow : Window
     {
-        public RollWindow(List<Die> dice)
+        public RollWindow(List<RollResult> diceResults)
         {
             InitializeComponent();
-            Img1.Source = dice[0].DisplayDie().Source;
-            Img2.Source = dice[1].DisplayDie().Source;
-            Img3.Source = dice[2].DisplayDie().Source;
+            Img1.Source = diceResults[0].DisplayDie().Source;
+            Img2.Source = diceResults[1].DisplayDie().Source;
+            Img3.Source = diceResults[2].DisplayDie().Source;
         }
     }
 }

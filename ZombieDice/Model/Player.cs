@@ -23,9 +23,13 @@ namespace ZombieDice.Model
 
         public void Play() // button click - take dice and roll
         {
-            List<Die> dice = Roll.Runners; // all runners dice from previous roll are thrown in the next roll
+            List<Die> dice = new List<Die>(); // all runners dice from previous roll are thrown in the next roll
+            foreach (RollResult rollResult in Roll.Runners)
+            {
+                dice.Add(new Die(rollResult.Color));
+            }
+            
             dice.AddRange(DrawDice());
-
             Roll.RollDice(dice);
         }
 
@@ -37,7 +41,7 @@ namespace ZombieDice.Model
         public List<Die> DrawDice()
         {
             int diceToDraw = 3 - Roll.Runners.Count;
-            if (!Roll._cup.EnoughDiceInCup(diceToDraw))
+            if (!Roll.Cup.EnoughDiceInCup(diceToDraw))
             {
                 Roll.returnAllBrainsToCup();
             }

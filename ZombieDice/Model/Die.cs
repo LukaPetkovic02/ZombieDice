@@ -26,10 +26,9 @@ namespace ZombieDice.Model
     {
         DIE_VALUE Value { get; }
     }
-    public class Die : IColor, IValue
+    public class Die : IColor
     {
         public DIE_COLOR Color { get; private set; }
-        public DIE_VALUE Value { get; private set; }
         private const int NumberOfSides = 6;
 
         private static DIE_VALUE[] greenDie = { DIE_VALUE.BRAIN ,DIE_VALUE.BRAIN,DIE_VALUE.BRAIN,DIE_VALUE.STEP,DIE_VALUE.STEP,DIE_VALUE.SHOTGUN};
@@ -43,8 +42,7 @@ namespace ZombieDice.Model
         public RollResult Roll()
         {
             DIE_VALUE rolledValue = GetRandomDieValue();
-            Value = rolledValue;
-            return new RollResult(Color, Value);
+            return new RollResult(Color, rolledValue);
         }
         private DIE_VALUE GetRandomDieValue()
         {
@@ -59,16 +57,6 @@ namespace ZombieDice.Model
                 default:
                     return DIE_VALUE.BRAIN;
             }
-        }
-        public Image DisplayDie() // RollResult
-        {
-            Image image = new()
-            {
-                Height = 50,
-                Width = 50,
-                Source = new BitmapImage(new Uri($"../../../images/{Color.ToString().ToLower()}_{Value.ToString().ToLower()}.png", UriKind.RelativeOrAbsolute))
-            };
-            return image;
         }
     }
 }

@@ -5,17 +5,17 @@ namespace ZombieDice.Model
 {
     public class Roll
     {
-        public int BrainCount;
-        public List<Die> Brains;
-        public List<Die> Runners;
-        public List<Die> Shotguns;
-        public Cup _cup;
-        public RollWindow rollWindow;
+        public int BrainCount { get; private set; }
+        public List<RollResult> Brains { get; private set; }
+        public List<RollResult> Runners { get; private set; }
+        public List<RollResult> Shotguns { get; private set; }
+        public Cup Cup { get; private set; }
+        public RollWindow rollWindow { get; private set; }
         public Roll()
         {
-            Brains = new List<Die>();
-            Runners = new List<Die>();
-            Shotguns = new List<Die>();
+            Brains = new List<RollResult>();
+            Runners = new List<RollResult>();
+            Shotguns = new List<RollResult>();
             BrainCount = 0;
             initCup();
         }
@@ -25,37 +25,38 @@ namespace ZombieDice.Model
             List<Die> drawnDice = new List<Die>();
             for (int i = 0; i < numberOfDiceToDraw; i++)
             {
-                drawnDice.Add(_cup.PickDie());
+                drawnDice.Add(Cup.PickDie());
             }
-            
+
             return drawnDice;
         }
 
         public void RollDice(List<Die> dice)
         {
-            Runners = new List<Die>();
+            Runners.Clear();
+            List<RollResult> diceResults = new List<RollResult>();
             foreach (Die die in dice)
             {
                 RollResult rollResult = die.Roll();
                 if (rollResult.Value == DIE_VALUE.BRAIN)
                 {
                     BrainCount++;
-                    Brains.Add(die);
+                    Brains.Add(rollResult);
                 }
 
                 if (rollResult.Value == DIE_VALUE.STEP)
                 {
-                    Runners.Add(die);
+                    Runners.Add(rollResult);
                 }
 
                 if (rollResult.Value == DIE_VALUE.SHOTGUN)
                 {
-                    Shotguns.Add(die);
+                    Shotguns.Add(rollResult);
                 }
-                    
+                diceResults.Add(rollResult);
             }
 
-            rollWindow = new RollWindow(dice);
+            rollWindow = new RollWindow(diceResults);
             rollWindow.ShowDialog();
         }
 
@@ -63,9 +64,9 @@ namespace ZombieDice.Model
         // and the player wants to keep rolling
         public void returnAllBrainsToCup() 
         {
-            foreach (Die die in Brains)
+            foreach (RollResult rollResult in Brains)
             {
-                _cup.ReturnDiceToCup(die);
+                Cup.ReturnDiceToCup(new Die(rollResult.Color));
             }
             Brains.Clear();
         }
@@ -88,7 +89,7 @@ namespace ZombieDice.Model
                 dice.Add(new Die(DIE_COLOR.RED));
             }
 
-            _cup = new Cup(dice);
+            Cup = new Cup(dice);
         }
     }
 }
