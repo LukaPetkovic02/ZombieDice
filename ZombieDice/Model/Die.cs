@@ -1,8 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace ZombieDice.Model
+﻿namespace ZombieDice.Model
 {
     public enum DIE_COLOR
     {

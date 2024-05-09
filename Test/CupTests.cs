@@ -3,35 +3,52 @@
     [TestFixture]
     public class CupTests
     {
-        //[Test]
-        //public void PickDie_CupNotEmpty_ReturnsDie()
-        //{
-        //    Cup cup = new Cup();
+        [Test]
+        public void PickDie_CupNotEmpty_ReturnsDie()
+        {
+            List<Die> dice = new List<Die>();
+            for (int i = 0; i < 6; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.GREEN));
+            }
 
-        //    Die die = cup.PickDie();
+            for (int i = 0; i < 4; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.YELLOW));
+            }
 
-        //    Assert.IsNotNull(die);
-        //    Assert.IsTrue(Enum.IsDefined(typeof(DIE_COLOR), die.Color));
-        //}
+            for (int i = 0; i < 3; i++)
+            {
+                dice.Add(new Die(DIE_COLOR.RED));
+            }
 
-        //[Test]
-        //public void PickDie_CupEmpty_ThrowsInvalidOperationException()
-        //{
-        //    Cup cup = new Cup();
-        //    cup.Dice.Clear();
+            Cup cup = new Cup(dice);
 
-        //    Assert.Throws<InvalidOperationException>(() => cup.PickDie());
-        //}
+            Die die = cup.PickDie();
 
-        //[Test]
-        //public void ReturnDiceToCup_AddsDieToCup()
-        //{
-        //    Cup cup = new Cup();
-        //    Die die = new Die(DIE_COLOR.GREEN);
+            Assert.IsNotNull(die);
+            Assert.IsTrue(Enum.IsDefined(typeof(DIE_COLOR), die.Color));
+        }
 
-        //    cup.ReturnDiceToCup(die);
+        [Test]
+        public void PickDie_CupEmpty_ThrowsInvalidOperationException()
+        {
+            List<Die> dice = new List<Die>();
+            Cup cup = new Cup(dice);
 
-        //    Assert.Contains(die, cup.Dice);
-        //}
+            Assert.Throws<InvalidOperationException>(() => cup.PickDie());
+        }
+
+        [Test]
+        public void ReturnDiceToCup_AddsDieToCup()
+        {
+            List<Die> dice = new List<Die>();
+            Cup cup = new Cup(dice);
+            Die die = new Die(DIE_COLOR.GREEN);
+
+            cup.ReturnDiceToCup(die);
+
+            Assert.Contains(die, cup.dice);
+        }
     }
 }

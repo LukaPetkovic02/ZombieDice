@@ -6,7 +6,7 @@ namespace ZombieDice.Model
 {
     public sealed class Cup
     {
-        private readonly List<Die> dice = new List<Die>();
+        public readonly List<Die> dice = new List<Die>();
 
         public Cup(List<Die> dice)
         {

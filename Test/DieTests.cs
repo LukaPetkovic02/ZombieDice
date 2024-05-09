@@ -4,39 +4,25 @@ namespace Test
     public class DieTests
     {
         [Test]
-        public void Roll_GreenDie_ShouldSetValidValue()
+        public void Die_InitializesWithCorrectColor()
         {
-            Die die = new Die(DIE_COLOR.GREEN);
+            DIE_COLOR color = DIE_COLOR.GREEN;
 
-            die.Roll();
+            var die = new Die(color);
 
-            Assert.That(die.Value, Is.EqualTo(DIE_VALUE.BRAIN)
-                .Or.EqualTo(DIE_VALUE.STEP)
-                .Or.EqualTo(DIE_VALUE.SHOTGUN));
+            Assert.AreEqual(color, die.Color);
         }
 
         [Test]
-        public void Roll_YellowDie_ShouldSetValidValue()
+        public void Die_Roll_ReturnsValidRollResult()
         {
-            Die die = new Die(DIE_COLOR.YELLOW);
+            var die = new Die(DIE_COLOR.GREEN);
 
-            die.Roll();
+            var rollResult = die.Roll();
 
-            Assert.That(die.Value, Is.EqualTo(DIE_VALUE.BRAIN)
-                .Or.EqualTo(DIE_VALUE.STEP)
-                .Or.EqualTo(DIE_VALUE.SHOTGUN));
-        }
-
-        [Test]
-        public void Roll_RedDie_ShouldSetValidValue()
-        {
-            Die die = new Die(DIE_COLOR.RED);
-
-            die.Roll();
-
-            Assert.That(die.Value, Is.EqualTo(DIE_VALUE.BRAIN)
-                .Or.EqualTo(DIE_VALUE.STEP)
-                .Or.EqualTo(DIE_VALUE.SHOTGUN));
+            Assert.IsNotNull(rollResult);
+            Assert.AreEqual(DIE_COLOR.GREEN, rollResult.Color);
+            Assert.IsTrue(Enum.IsDefined(typeof(DIE_VALUE), rollResult.Value));
         }
     }
 }
