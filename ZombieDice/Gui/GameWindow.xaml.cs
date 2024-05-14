@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using DieSDK;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using ZombieDice.Model;
 
 namespace ZombieDice.Gui
@@ -81,19 +84,19 @@ namespace ZombieDice.Gui
             {
                 string imageName = $"ImgBrainDice{i+1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = player.Roll.Brains[i].DisplayDie().Source;
+                image.Source = new BitmapImage(new Uri(player.Roll.Brains[i].DisplayDie(), UriKind.RelativeOrAbsolute));
             }
             for (int i = 0; i < player.Roll.Runners.Count; i++)
             {
                 string imageName = $"ImgStepDice{i + 1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = player.Roll.Runners[i].DisplayDie().Source;
+                image.Source = new BitmapImage(new Uri(player.Roll.Runners[i].DisplayDie(), UriKind.RelativeOrAbsolute));
             }
             for (int i = 0; i < player.Roll.Shotguns.Count; i++)
             {
                 string imageName = $"ImgShotgunDice{i + 1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = player.Roll.Shotguns[i].DisplayDie().Source;
+                image.Source = new BitmapImage(new Uri(player.Roll.Shotguns[i].DisplayDie(), UriKind.RelativeOrAbsolute));
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DieSDK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

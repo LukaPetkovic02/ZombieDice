@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DieSDK;
+using System.Collections.Generic;
 
 namespace ZombieDice.Model
 {
@@ -26,7 +27,7 @@ namespace ZombieDice.Model
             List<Die> dice = new List<Die>(); // all runners dice from previous roll are thrown in the next roll
             foreach (RollResult rollResult in Roll.Runners)
             {
-                dice.Add(new Die(rollResult.Color));
+                dice.Add(new Die(rollResult.Color,Values.Brain));
             }
             
             dice.AddRange(DrawDice());

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ZombieDice.Gui;
+﻿using DieSDK;
+using System.Collections.Generic;
 
 namespace ZombieDice.Model
 {
@@ -37,18 +37,18 @@ namespace ZombieDice.Model
             foreach (Die die in dice)
             {
                 RollResult rollResult = die.Roll();
-                if (rollResult.Value == DIE_VALUE.BRAIN)
+                if (rollResult.Value == Values.Brain)
                 {
                     BrainCount++;
                     Brains.Add(rollResult);
                 }
 
-                if (rollResult.Value == DIE_VALUE.STEP)
+                if (rollResult.Value == Values.Step)
                 {
                     Runners.Add(rollResult);
                 }
 
-                if (rollResult.Value == DIE_VALUE.SHOTGUN)
+                if (rollResult.Value == Values.Shotgun)
                 {
                     Shotguns.Add(rollResult);
                 }
@@ -63,7 +63,7 @@ namespace ZombieDice.Model
         {
             foreach (RollResult rollResult in Brains)
             {
-                Cup.ReturnDiceToCup(new Die(rollResult.Color));
+                Cup.ReturnDiceToCup(new Die(rollResult.Color,Values.Brain));
             }
             Brains.Clear();
         }
@@ -73,17 +73,17 @@ namespace ZombieDice.Model
             List<Die> dice = new List<Die>();
             for (int i = 0; i < 6; i++)
             {
-                dice.Add(new Die(DIE_COLOR.GREEN));
+                dice.Add(new Die(Colors.Green,Values.Brain));
             }
 
             for (int i = 0; i < 4; i++)
             {
-                dice.Add(new Die(DIE_COLOR.YELLOW));
+                dice.Add(new Die(Colors.Yellow,Values.Brain));
             }
 
             for (int i = 0; i < 3; i++)
             {
-                dice.Add(new Die(DIE_COLOR.RED));
+                dice.Add(new Die(Colors.Red,Values.Brain));
             }
 
             Cup = new Cup(dice);

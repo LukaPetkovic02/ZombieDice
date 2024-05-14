@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using DieSDK;
+using System.Collections.Generic;
 using System.Windows;
-using ZombieDice.Model;
+using System.Windows.Media.Imaging;
 
 namespace ZombieDice.Gui
 {
@@ -12,9 +14,9 @@ namespace ZombieDice.Gui
         public RollWindow(List<RollResult> diceResults)
         {
             InitializeComponent();
-            Img1.Source = diceResults[0].DisplayDie().Source;
-            Img2.Source = diceResults[1].DisplayDie().Source;
-            Img3.Source = diceResults[2].DisplayDie().Source;
+            Img1.Source = new BitmapImage(new Uri(diceResults[0].DisplayDie(),UriKind.RelativeOrAbsolute));
+            Img2.Source = new BitmapImage(new Uri(diceResults[1].DisplayDie(), UriKind.RelativeOrAbsolute));
+            Img3.Source = new BitmapImage(new Uri(diceResults[2].DisplayDie(), UriKind.RelativeOrAbsolute));
         }
     }
 }
