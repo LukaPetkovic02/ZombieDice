@@ -10,7 +10,6 @@ namespace ZombieDice.Model
         public List<RollResult> Runners { get; private set; }
         public List<RollResult> Shotguns { get; private set; }
         public Cup Cup { get; private set; }
-        public RollWindow rollWindow { get; private set; }
         public Roll()
         {
             Brains = new List<RollResult>();
@@ -31,7 +30,7 @@ namespace ZombieDice.Model
             return drawnDice;
         }
 
-        public void RollDice(List<Die> dice)
+        public List<RollResult> RollDice(List<Die> dice)
         {
             Runners.Clear();
             List<RollResult> diceResults = new List<RollResult>();
@@ -55,9 +54,7 @@ namespace ZombieDice.Model
                 }
                 diceResults.Add(rollResult);
             }
-
-            rollWindow = new RollWindow(diceResults);
-            rollWindow.ShowDialog();
+            return diceResults;
         }
 
         // special case when there aren't enough dices in the cup

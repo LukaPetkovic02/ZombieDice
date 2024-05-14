@@ -1,4 +1,6 @@
-﻿namespace ZombieDice.Model
+﻿using DieSDK;
+
+namespace ZombieDice.Model
 {
     public enum DIE_COLOR
     {
@@ -45,11 +47,11 @@
             switch (Color)
             {
                 case DIE_COLOR.GREEN:
-                    return greenDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
+                    return greenDie[RandomGenerator.Instance.Next(NumberOfSides)];
                 case DIE_COLOR.YELLOW:
-                    return yellowDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
+                    return yellowDie[RandomGenerator.Instance.Next(NumberOfSides)];
                 case DIE_COLOR.RED:
-                    return redDie[RandomGenerator.Instance.Next(0, NumberOfSides)];
+                    return redDie[RandomGenerator.Instance.Next(NumberOfSides)];
                 default:
                     return DIE_VALUE.BRAIN;
             }

@@ -21,7 +21,7 @@ namespace ZombieDice.Model
             return BrainCount + Roll.BrainCount >= 13;
         }
 
-        public void Play() // button click - take dice and roll
+        public List<RollResult> Play() // button click - take dice and roll
         {
             List<Die> dice = new List<Die>(); // all runners dice from previous roll are thrown in the next roll
             foreach (RollResult rollResult in Roll.Runners)
@@ -30,7 +30,8 @@ namespace ZombieDice.Model
             }
             
             dice.AddRange(DrawDice());
-            Roll.RollDice(dice);
+            List<RollResult> diceResult = Roll.RollDice(dice);
+            return diceResult;
         }
 
         public bool Lost()

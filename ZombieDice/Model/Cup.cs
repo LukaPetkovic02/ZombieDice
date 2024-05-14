@@ -23,7 +23,7 @@ namespace ZombieDice.Model
                 throw new InvalidOperationException("Cup is empty, cannot pick a die.");
             }
 
-            int index = RandomGenerator.Instance.Next(0, dice.Count);
+            int index = RandomGenerator.Instance.Next(dice.Count);
             Die selected = dice.ElementAt(index);
             dice.RemoveAt(index);
             return selected;

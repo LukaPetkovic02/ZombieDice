@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DieSDK\DieSDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="images\green_brain.png" />
     <Resource Include="images\green_shotgun.png" />
     <Resource Include="images\green_step.png" />

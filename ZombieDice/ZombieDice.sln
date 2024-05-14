@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZombieDice", "ZombieDice.csproj", "{E77C181D-88B6-448C-B649-4E458A2F250F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{E5C27897-DAA9-4012-9920-66C4CEDAC52F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "..\Test\Test.csproj", "{E5C27897-DAA9-4012-9920-66C4CEDAC52F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DieSDK", "..\DieSDK\DieSDK.csproj", "{036D912D-AFC5-4531-BB1F-7076AB234263}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E5C27897-DAA9-4012-9920-66C4CEDAC52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C27897-DAA9-4012-9920-66C4CEDAC52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C27897-DAA9-4012-9920-66C4CEDAC52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{036D912D-AFC5-4531-BB1F-7076AB234263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{036D912D-AFC5-4531-BB1F-7076AB234263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{036D912D-AFC5-4531-BB1F-7076AB234263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{036D912D-AFC5-4531-BB1F-7076AB234263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using ZombieDice.Model;
 
@@ -23,13 +24,15 @@ namespace ZombieDice.Gui
 
         private void BtnRoll_Click(object sender, RoutedEventArgs e)
         {
-            player.Play();
+            List<RollResult> diceResult = player.Play();
+            RollWindow rollWindow = new RollWindow(diceResult);
+            rollWindow.ShowDialog();
             if (player.Lost())
             {
                 MessageBoxResult result = MessageBox.Show("You rolled 3 or more shotguns so your turn is over!", "Turn finished", MessageBoxButton.OK);
                 if (result == MessageBoxResult.OK)
                 {
-                    player.Roll.rollWindow?.Close();
+                    rollWindow?.Close();
                     SwitchPlayer();
                 }
                 player.Roll = new Roll();
@@ -40,7 +43,7 @@ namespace ZombieDice.Gui
                 MessageBoxResult result = MessageBox.Show("You have collected 13 brains! Players that played after you have 1 more chance!","Turn finished",MessageBoxButton.OK);
                 if (result == MessageBoxResult.OK)
                 {
-                    player.Roll.rollWindow?.Close();
+                    rollWindow?.Close();
                     player.StoreBrains();
                     SwitchPlayer();
                 }
