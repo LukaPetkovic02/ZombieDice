@@ -1,4 +1,6 @@
-﻿namespace Test
+﻿using DieSDK;
+
+namespace Test
 {
     [TestFixture]
     public class CupTests
@@ -9,17 +11,17 @@
             List<Die> dice = new List<Die>();
             for (int i = 0; i < 6; i++)
             {
-                dice.Add(new Die(DIE_COLOR.GREEN));
+                dice.Add(new Die(Colors.Green,Values.Brain));
             }
 
             for (int i = 0; i < 4; i++)
             {
-                dice.Add(new Die(DIE_COLOR.YELLOW));
+                dice.Add(new Die(Colors.Yellow,Values.Brain));
             }
 
             for (int i = 0; i < 3; i++)
             {
-                dice.Add(new Die(DIE_COLOR.RED));
+                dice.Add(new Die(Colors.Red,Values.Brain));
             }
 
             Cup cup = new Cup(dice);
@@ -27,7 +29,7 @@
             Die die = cup.PickDie();
 
             Assert.IsNotNull(die);
-            Assert.IsTrue(Enum.IsDefined(typeof(DIE_COLOR), die.Color));
+            Assert.IsTrue(die.Color is IColor);
         }
 
         [Test]
@@ -44,7 +46,7 @@
         {
             List<Die> dice = new List<Die>();
             Cup cup = new Cup(dice);
-            Die die = new Die(DIE_COLOR.GREEN);
+            Die die = new Die(Colors.Green,Values.Brain);
 
             cup.ReturnDiceToCup(die);
 

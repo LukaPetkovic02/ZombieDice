@@ -1,3 +1,5 @@
+using DieSDK;
+
 namespace Test
 {
     [TestFixture]
@@ -6,9 +8,9 @@ namespace Test
         [Test]
         public void Die_InitializesWithCorrectColor()
         {
-            DIE_COLOR color = DIE_COLOR.GREEN;
+            IColor color = Colors.Green;
 
-            var die = new Die(color);
+            var die = new Die(color,Values.Brain);
 
             Assert.AreEqual(color, die.Color);
         }
@@ -16,13 +18,13 @@ namespace Test
         [Test]
         public void Die_Roll_ReturnsValidRollResult()
         {
-            var die = new Die(DIE_COLOR.GREEN);
+            var die = new Die(Colors.Green,Values.Brain);
 
             var rollResult = die.Roll();
 
             Assert.IsNotNull(rollResult);
-            Assert.AreEqual(DIE_COLOR.GREEN, rollResult.Color);
-            Assert.IsTrue(Enum.IsDefined(typeof(DIE_VALUE), rollResult.Value));
+            Assert.AreEqual(Colors.Green, rollResult.Color);
+            Assert.IsTrue(rollResult.Value is IValue);
         }
     }
 }

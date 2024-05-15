@@ -1,4 +1,6 @@
-﻿namespace Test
+﻿using DieSDK;
+
+namespace Test
 {
     [TestFixture]
     public class RollTests
@@ -7,7 +9,8 @@
         public void DrawDiceFromCup_ReturnsCorrectNumberOfDice()
         {
             // Arrange
-            var roll = new Roll();
+            ICupSetup cupSetup = new BaseCupSetup();
+            var roll = new Roll(cupSetup);
             int numberOfDiceToDraw = 3;
 
             // Act
@@ -15,14 +18,15 @@
 
             // Assert
             Assert.AreEqual(numberOfDiceToDraw, drawnDice.Count);
-            Assert.IsTrue(drawnDice.All(die => die.Color == DIE_COLOR.GREEN || die.Color == DIE_COLOR.YELLOW || die.Color == DIE_COLOR.RED));
+            Assert.IsTrue(drawnDice.All(die => die.Color == Colors.Green || die.Color == Colors.Yellow || die.Color == Colors.Red));
         }
 
         [Test]
         public void RollDice_PopulatesResults()
         {
             // Arrange
-            var roll = new Roll();
+            ICupSetup cupSetup = new BaseCupSetup();
+            var roll = new Roll(cupSetup);
             var diceToRoll = roll.DrawDiceFromCup(3);
 
             // Act
@@ -37,7 +41,8 @@
         public void ReturnAllBrainsToCup_ReturnsBrainsToCup()
         {
             // Arrange
-            var roll = new Roll();
+            ICupSetup cupSetup = new BaseCupSetup();
+            var roll = new Roll(cupSetup);
             var diceToRoll = roll.DrawDiceFromCup(3);
             roll.RollDice(diceToRoll);
 
