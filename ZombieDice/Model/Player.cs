@@ -14,7 +14,8 @@ namespace ZombieDice.Model
         {
             Name = name;
             BrainCount = 0;
-            Roll = new Roll();
+            ICupSetup cupSetup = new BaseCupSetup();
+            Roll = new Roll(cupSetup);
         }
 
         public bool HasPlayerCollected13Brains()
@@ -55,7 +56,8 @@ namespace ZombieDice.Model
             if (!Lost())
             {
                 BrainCount += Roll.BrainCount;
-                Roll = new Roll();
+                ICupSetup cupSetup = new BaseCupSetup();
+                Roll = new Roll(cupSetup);
             }
         }
     }

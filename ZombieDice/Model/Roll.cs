@@ -5,18 +5,20 @@ namespace ZombieDice.Model
 {
     public class Roll
     {
+        private readonly ICupSetup cupSetup;
         public int BrainCount { get; private set; }
         public List<RollResult> Brains { get; private set; }
         public List<RollResult> Runners { get; private set; }
         public List<RollResult> Shotguns { get; private set; }
         public Cup Cup { get; private set; }
-        public Roll()
+        public Roll(ICupSetup cupSetup)
         {
             Brains = new List<RollResult>();
             Runners = new List<RollResult>();
             Shotguns = new List<RollResult>();
             BrainCount = 0;
-            initCup();
+            this.cupSetup = cupSetup;
+            InitCup();
         }
 
         public List<Die> DrawDiceFromCup(int numberOfDiceToDraw)
@@ -68,24 +70,10 @@ namespace ZombieDice.Model
             Brains.Clear();
         }
 
-        private void initCup()
+        private void InitCup()
         {
             List<Die> dice = new List<Die>();
-            for (int i = 0; i < 6; i++)
-            {
-                dice.Add(new Die(Colors.Green,Values.Brain));
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                dice.Add(new Die(Colors.Yellow,Values.Brain));
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                dice.Add(new Die(Colors.Red,Values.Brain));
-            }
-
+            cupSetup.Setup(dice);
             Cup = new Cup(dice);
         }
     }

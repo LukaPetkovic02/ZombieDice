@@ -38,7 +38,8 @@ namespace ZombieDice.Gui
                     rollWindow?.Close();
                     SwitchPlayer();
                 }
-                player.Roll = new Roll();
+                ICupSetup cupSetup = new BaseCupSetup();
+                player.Roll = new Roll(cupSetup);
             }
             else if (player.HasPlayerCollected13Brains() && !_game.LastTurn)
             {

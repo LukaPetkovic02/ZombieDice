@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DieSDK
+﻿namespace DieSDK
 {
     public class RollResult : IColor, IValue
     {
@@ -19,33 +13,21 @@ namespace DieSDK
 
         public string DisplayDie()
         {
-            string color="",value="";
-            switch (Color)
-            {
-                case GreenColor:
-                    color = "green";
-                    break;
-                case RedColor:
-                    color = "red";
-                    break;
-                case YellowColor:
-                    color = "yellow";
-                    break;
-            }
+            string color = GetColorName();
+            string value = GetValueName();
 
-            switch (Value)
-            {
-                case ShotgunValue:
-                    value = "shotgun";
-                    break;
-                case StepValue:
-                    value = "step";
-                    break;
-                case BrainValue:
-                    value = "brain";
-                    break;
-            }
             return $"../../../images/{color}_{value}.png";
+        }
+        private string GetColorName()
+        {
+            string typeName = Color.GetType().Name;
+            return typeName[..^5].ToLower();
+        }
+
+        private string GetValueName()
+        {
+            string typeName = Value.GetType().Name;
+            return typeName[..^5].ToLower();
         }
     }
 }
