@@ -43,7 +43,7 @@ namespace ZombieDice.Model
         
         public bool Lost()
         {
-            int lives = Roll.Helmet ? 3 : 4;
+            int lives = Roll.Helmet ? 4 : 3;
             return Roll.Shotguns.Count + Roll.DoubleShotguns.Count >= lives;
         }
 
