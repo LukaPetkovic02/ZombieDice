@@ -45,6 +45,8 @@
                 <DataGridTextColumn Header="Total Brains" Binding="{Binding BrainCount}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Image x:Name="ImgSpecialItem"  HorizontalAlignment="Left" Height="50" Margin="625,386,0,0" VerticalAlignment="Top" Width="44"/>
+        <Label x:Name="LabelSpecialItem" Content="Special item:" HorizontalAlignment="Left" Height="29" Margin="606,341,0,0" VerticalAlignment="Top" Width="98"/>
 
     </Grid>
 </Window>

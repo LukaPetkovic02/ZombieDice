@@ -87,6 +87,13 @@ namespace ZombieDice.Gui
                 Image image = Grid.FindName(imageName) as Image;
                 image.Source = new BitmapImage(new Uri(player.Roll.Brains[i].DisplayDie(), UriKind.RelativeOrAbsolute));
             }
+
+            for (int i = 0; i < player.Roll.DoubleBrains.Count; i++)
+            {
+                string imageName = $"ImgBrainDice{i + 1 + player.Roll.Brains.Count}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = new BitmapImage(new Uri(player.Roll.DoubleBrains[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+            }
             for (int i = 0; i < player.Roll.Runners.Count; i++)
             {
                 string imageName = $"ImgStepDice{i + 1}";
@@ -98,6 +105,21 @@ namespace ZombieDice.Gui
                 string imageName = $"ImgShotgunDice{i + 1}";
                 Image image = Grid.FindName(imageName) as Image;
                 image.Source = new BitmapImage(new Uri(player.Roll.Shotguns[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+            }
+            for (int i = 0; i < player.Roll.DoubleShotguns.Count; i++)
+            {
+                string imageName = $"ImgBrainDice{i + 1 + player.Roll.Shotguns.Count}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = new BitmapImage(new Uri(player.Roll.DoubleShotguns[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+            }
+
+            if (player.Roll.EnergyDrink)
+            {
+                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_energy.png"));
+            }
+            else if (player.Roll.Helmet)
+            {
+                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_helmet.png"));
             }
         }
 
