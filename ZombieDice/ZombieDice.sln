@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZombieDice", "ZombieDice.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "..\Test\Test.csproj", "{E5C27897-DAA9-4012-9920-66C4CEDAC52F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DieSDK", "..\DieSDK\DieSDK.csproj", "{036D912D-AFC5-4531-BB1F-7076AB234263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DieSDK", "..\DieSDK\DieSDK.csproj", "{036D912D-AFC5-4531-BB1F-7076AB234263}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

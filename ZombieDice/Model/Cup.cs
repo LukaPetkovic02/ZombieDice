@@ -8,10 +8,9 @@ namespace ZombieDice.Model
     public sealed class Cup
     {
         public readonly List<Die> dice = new List<Die>();
-
-        public Cup(List<Die> dice)
+        public Cup(ICupSetup cupSetup)
         {
-            this.dice = dice;
+            cupSetup.Setup(dice);
         }
         public bool EnoughDiceInCup(int numberOfDiceToDraw)
         {

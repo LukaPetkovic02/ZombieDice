@@ -14,6 +14,16 @@
     }
     public sealed class RedColor : IColor
     {
+    }
+    public sealed class SantaColor : IColor
+    {
+    }
 
+    public sealed class HunkColor : IColor
+    {
+    }
+
+    public sealed class HottieColor : IColor
+    {
     }
 }

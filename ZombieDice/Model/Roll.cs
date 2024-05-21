@@ -5,7 +5,6 @@ namespace ZombieDice.Model
 {
     public class Roll
     {
-        private readonly ICupSetup cupSetup;
         public int BrainCount { get; private set; }
         public List<RollResult> Brains { get; private set; }
         public List<RollResult> Runners { get; private set; }
@@ -17,8 +16,7 @@ namespace ZombieDice.Model
             Runners = new List<RollResult>();
             Shotguns = new List<RollResult>();
             BrainCount = 0;
-            this.cupSetup = cupSetup;
-            InitCup();
+            Cup = new Cup(cupSetup);
         }
 
         public List<Die> DrawDiceFromCup(int numberOfDiceToDraw)
@@ -42,19 +40,19 @@ namespace ZombieDice.Model
                 if (rollResult.Value == Values.Brain)
                 {
                     BrainCount++;
-                    Brains.Add(rollResult);
+                    Brains.Add(new RollResult(rollResult.Color, rollResult.Value, die));
                 }
 
                 if (rollResult.Value == Values.Step)
                 {
-                    Runners.Add(rollResult);
+                    Runners.Add(new RollResult(rollResult.Color, rollResult.Value, die));
                 }
 
                 if (rollResult.Value == Values.Shotgun)
                 {
-                    Shotguns.Add(rollResult);
+                    Shotguns.Add(new RollResult(rollResult.Color, rollResult.Value, die));
                 }
-                diceResults.Add(rollResult);
+                diceResults.Add(new RollResult(rollResult.Color, rollResult.Value, die));
             }
             return diceResults;
         }
@@ -65,16 +63,9 @@ namespace ZombieDice.Model
         {
             foreach (RollResult rollResult in Brains)
             {
-                Cup.ReturnDiceToCup(new Die(rollResult.Color,Values.Brain));
+                Cup.ReturnDiceToCup(rollResult.Die);
             }
             Brains.Clear();
-        }
-
-        private void InitCup()
-        {
-            List<Die> dice = new List<Die>();
-            cupSetup.Setup(dice);
-            Cup = new Cup(dice);
         }
     }
 }

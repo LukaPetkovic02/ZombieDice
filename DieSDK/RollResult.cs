@@ -4,11 +4,13 @@
     {
         public IColor Color { get; private set; }
         public IValue Value { get; private set; }
+        public Die Die { get; }
 
-        public RollResult(IColor color, IValue value)
+        public RollResult(IColor color, IValue value, Die die)
         {
             Color = color;
             Value = value;
+            Die = die;
         }
 
         public string DisplayDie()

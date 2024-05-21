@@ -18,4 +18,24 @@
     {
 
     }
+
+    public sealed class DoubleBrainValue : IValue
+    {
+
+    }
+
+    public sealed class DoubleShotgunValue : IValue
+    {
+
+    }
+
+    public sealed class EnergyDrinkValue : IValue
+    {
+
+    }
+
+    public sealed class HelmetValue : IValue
+    {
+
+    }
 }
