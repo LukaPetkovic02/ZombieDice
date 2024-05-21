@@ -9,13 +9,21 @@ namespace ZombieDice.Model
         public List<RollResult> Brains { get; private set; }
         public List<RollResult> Runners { get; private set; }
         public List<RollResult> Shotguns { get; private set; }
+        public List<RollResult> DoubleShotguns { get; private set; }
+        public List<RollResult> DoubleBrains { get; private set; }
+        public bool Helmet { get; private set; }
+        public bool EnergyDrink { get; private set; }
         public Cup Cup { get; private set; }
         public Roll(ICupSetup cupSetup)
         {
             Brains = new List<RollResult>();
             Runners = new List<RollResult>();
             Shotguns = new List<RollResult>();
+            DoubleShotguns = new List<RollResult>();
+            DoubleBrains = new List<RollResult>();
             BrainCount = 0;
+            Helmet = false;
+            EnergyDrink = false;
             Cup = new Cup(cupSetup);
         }
 
@@ -45,27 +53,69 @@ namespace ZombieDice.Model
 
                 if (rollResult.Value == Values.Step)
                 {
-                    Runners.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                    if (EnergyDrink && rollResult.Color == Colors.Green)
+                    {
+                        BrainCount++;
+                        Brains.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                    }
+                    else
+                    {
+                        Runners.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                    }
                 }
 
                 if (rollResult.Value == Values.Shotgun)
                 {
                     Shotguns.Add(new RollResult(rollResult.Color, rollResult.Value, die));
                 }
+
+                if (rollResult.Value == Values.DoubleBrain)
+                {
+                    BrainCount += 2;
+                    DoubleBrains.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                }
+
+                if (rollResult.Value == Values.DoubleShotgun)
+                {
+                    DoubleShotguns.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                }
+
+                if (rollResult.Value == Values.Helmet)
+                {
+                    Helmet = true;
+                }
+
+                if (rollResult.Value == Values.EnergyDrink)
+                {
+                    EnergyDrink = true;
+                }
                 diceResults.Add(new RollResult(rollResult.Color, rollResult.Value, die));
             }
             return diceResults;
         }
 
+        
         // special case when there aren't enough dices in the cup
         // and the player wants to keep rolling
-        public void returnAllBrainsToCup() 
+        public void returnAllBrainsToCup()
         {
             foreach (RollResult rollResult in Brains)
             {
-                Cup.ReturnDiceToCup(rollResult.Die);
+                if (rollResult.Color != Colors.Santa)
+                {
+                    Cup.ReturnDiceToCup(rollResult.Die);
+                }
             }
-            Brains.Clear();
+
+            foreach (RollResult rollResult in DoubleBrains)
+            {
+                if (rollResult.Color != Colors.Santa)
+                {
+                    Cup.ReturnDiceToCup(rollResult.Die);
+                }
+            }
+            Brains.RemoveAll(rollResult => rollResult.Color != Colors.Santa);
+            DoubleBrains.RemoveAll(rollResult => rollResult.Color != Colors.Santa);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ZombieDice.Model
 
         public bool HasPlayerCollected13Brains()
         {
-            return BrainCount + Roll.BrainCount >= 13;
+            return BrainCount + Roll.BrainCount + Roll.DoubleBrains.Count*2 >= 13;
         }
 
         public List<RollResult> Play() // button click - take dice and roll
@@ -40,10 +40,11 @@ namespace ZombieDice.Model
 
             return diceResult;
         }
-
+        
         public bool Lost()
         {
-            return Roll.Shotguns.Count >= 3;
+            int lives = Roll.Helmet ? 3 : 4;
+            return Roll.Shotguns.Count + Roll.DoubleShotguns.Count >= lives;
         }
 
         public List<Die> DrawDice()
@@ -60,7 +61,7 @@ namespace ZombieDice.Model
         {
             if (!Lost())
             {
-                BrainCount += Roll.BrainCount;
+                BrainCount += Roll.BrainCount + Roll.DoubleBrains.Count*2;
                 ICupSetup cupSetup = new BaseCupSetup();
                 Roll = new Roll(cupSetup);
             }
