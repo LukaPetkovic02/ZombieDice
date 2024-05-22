@@ -23,6 +23,7 @@ namespace ZombieDice.Gui
             DataContext = _game;
             LabelPlayerName.Content = _game.Players[_game.IndexTurn].Name;
             LabelTotalBrains.Content = _game.Players[_game.IndexTurn].BrainCount;
+            ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/yellow_step.png", UriKind.RelativeOrAbsolute));
         }
 
         private void BtnRoll_Click(object sender, RoutedEventArgs e)
@@ -116,11 +117,11 @@ namespace ZombieDice.Gui
 
             if (player.Roll.EnergyDrink)
             {
-                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_energy.png"));
+                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_energydrink.png", UriKind.RelativeOrAbsolute));
             }
             else if (player.Roll.Helmet)
             {
-                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_helmet.png"));
+                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_helmet.png", UriKind.RelativeOrAbsolute));
             }
         }
 

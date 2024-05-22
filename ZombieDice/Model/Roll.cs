@@ -90,6 +90,8 @@ namespace ZombieDice.Model
                 {
                     EnergyDrink = true;
                 }
+
+                MessageBox.Show($"{rollResult.Color} {rollResult.Value}");
                 diceResults.Add(new RollResult(rollResult.Color, rollResult.Value, die));
             }
             return diceResults;
