@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DieSDK;
 using ZombieDice.Model;
 
 namespace ZombieDice.Gui

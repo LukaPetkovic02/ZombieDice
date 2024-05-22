@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using DieSDK;
 using ZombieDice.Gui;
 using ZombieDice.Model;
 
@@ -19,7 +20,21 @@ namespace ZombieDice
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             int numOfPlayers = (int) ComboBoxNum.SelectedItem;
-            Game game = new Game(numOfPlayers);
+            
+            bool heroes = false, santa = false;
+            if (CheckBoxHeroes.IsChecked == true)
+            {
+                heroes = true;
+            }
+
+            if (CheckBoxSanta.IsChecked == true)
+            {
+                santa = true;
+            }
+
+            CupSetup baseCupSetup = new CupSetup();
+            ICupSetup cupSetup = baseCupSetup.Build(heroes, santa);
+            Game game = new Game(numOfPlayers, cupSetup);
             NameEntryWindow window = new NameEntryWindow(game);
             window.Show();
             Close();

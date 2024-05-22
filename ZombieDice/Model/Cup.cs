@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace ZombieDice.Model
 {
@@ -11,6 +12,11 @@ namespace ZombieDice.Model
         public Cup(ICupSetup cupSetup)
         {
             cupSetup.Setup(dice);
+            MessageBox.Show(cupSetup.GetType().Name);
+            //foreach (Die die in dice)
+            //{
+            //    MessageBox.Show($"{die.Color}");
+            //}
         }
         public bool EnoughDiceInCup(int numberOfDiceToDraw)
         {

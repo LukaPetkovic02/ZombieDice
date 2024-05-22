@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DieSDK;
 
 namespace ZombieDice.Model
 {
@@ -9,13 +10,15 @@ namespace ZombieDice.Model
         public List<Player> Players { get; set; }
         public int IndexTurn;
         public bool LastTurn;
+        public ICupSetup CupSetup;
 
-        public Game(int numOfPlayers)
+        public Game(int numOfPlayers, ICupSetup cupSetup)
         {
             Players = new List<Player>();
             IndexTurn = 0;
             NumOfPlayers = numOfPlayers;
             LastTurn = false;
+            CupSetup = cupSetup;
         }
 
         public bool NameExists(string name)
@@ -24,7 +27,7 @@ namespace ZombieDice.Model
         }
         public void AddPlayer(string name)
         {
-            Players.Add(new Player(name));
+            Players.Add(new Player(name, CupSetup));
         }
 
         public Player DetermineWinner()

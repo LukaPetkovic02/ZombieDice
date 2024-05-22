@@ -12,6 +12,8 @@
         <Label Name="NumOfPlayersLabel" Content="Number of players:" HorizontalAlignment="Left" Height="34" Margin="50,97,0,0" VerticalAlignment="Top" Width="135" FontSize="14"/>
         <Button x:Name="PlayBtn" Content="Play" HorizontalAlignment="Left" Height="34" Margin="347,97,0,0" VerticalAlignment="Top" Width="54" Background="#FF21EA52" RenderTransformOrigin="-0.056,1.057" Click="PlayBtn_Click" />
         <ComboBox x:Name="ComboBoxNum" HorizontalAlignment="Left" Height="30" Margin="205,98,0,0" VerticalAlignment="Top" Width="76" SelectedIndex="0"/>
+        <CheckBox x:Name="CheckBoxHeroes" Content="Heroes" HorizontalAlignment="Left" Height="25" Margin="50,167,0,0" VerticalAlignment="Top" Width="84"/>
+        <CheckBox x:Name="CheckBoxSanta" Content="Santa" HorizontalAlignment="Left" Height="25" Margin="50,211,0,0" VerticalAlignment="Top" Width="84"/>
 
     </Grid>
 </Window>

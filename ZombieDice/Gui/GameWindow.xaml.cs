@@ -38,8 +38,7 @@ namespace ZombieDice.Gui
                     rollWindow?.Close();
                     SwitchPlayer();
                 }
-                ICupSetup cupSetup = new BaseCupSetup();
-                player.Roll = new Roll(cupSetup);
+                player.Roll = new Roll(_game.CupSetup);
             }
             else if (player.HasPlayerCollected13Brains() && !_game.LastTurn)
             {
@@ -125,25 +124,38 @@ namespace ZombieDice.Gui
 
         private void EmptyImages()
         {
-            ImgStepDice1.Source = null;
-            ImgStepDice2.Source = null;
-            ImgStepDice3.Source = null;
-            ImgBrainDice1.Source = null;
-            ImgBrainDice2.Source = null;
-            ImgBrainDice3.Source = null;
-            ImgBrainDice4.Source = null;
-            ImgBrainDice5.Source = null;
-            ImgBrainDice6.Source = null;
-            ImgBrainDice7.Source = null;
-            ImgBrainDice8.Source = null;
-            ImgBrainDice9.Source = null;
-            ImgBrainDice10.Source = null;
-            ImgBrainDice11.Source = null;
-            ImgBrainDice12.Source = null;
-            ImgBrainDice13.Source = null;
-            ImgBrainDice14.Source = null;
-            ImgBrainDice15.Source = null;
-            ImgBrainDice16.Source = null;
+            for (int i = 1; i <= 16; i++)
+            {
+                string imageName = $"ImgBrainDice{i}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = null;
+            }
+
+            for (int i = 1; i <= 3; i++)
+            {
+                string imageName = $"ImgStepDice{i}";
+                Image image = Grid.FindName(imageName) as Image;
+                image.Source = null;
+            }
+            //ImgStepDice1.Source = null;
+            //ImgStepDice2.Source = null;
+            //ImgStepDice3.Source = null;
+            //ImgBrainDice1.Source = null;
+            //ImgBrainDice2.Source = null;
+            //ImgBrainDice3.Source = null;
+            //ImgBrainDice4.Source = null;
+            //ImgBrainDice5.Source = null;
+            //ImgBrainDice6.Source = null;
+            //ImgBrainDice7.Source = null;
+            //ImgBrainDice8.Source = null;
+            //ImgBrainDice9.Source = null;
+            //ImgBrainDice10.Source = null;
+            //ImgBrainDice11.Source = null;
+            //ImgBrainDice12.Source = null;
+            //ImgBrainDice13.Source = null;
+            //ImgBrainDice14.Source = null;
+            //ImgBrainDice15.Source = null;
+            //ImgBrainDice16.Source = null;
         }
     }
 }

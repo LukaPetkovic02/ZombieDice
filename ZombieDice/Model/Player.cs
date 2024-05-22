@@ -10,11 +10,12 @@ namespace ZombieDice.Model
         public int BrainCount { get; set; }
 
         public Roll Roll;
-        public Player(string name)
+        private readonly ICupSetup _cupSetup;
+        public Player(string name, ICupSetup cupSetup)
         {
             Name = name;
             BrainCount = 0;
-            ICupSetup cupSetup = new BaseCupSetup();
+            _cupSetup = cupSetup;
             Roll = new Roll(cupSetup);
         }
 
@@ -62,8 +63,7 @@ namespace ZombieDice.Model
             if (!Lost())
             {
                 BrainCount += Roll.BrainCount + Roll.DoubleBrains.Count*2;
-                ICupSetup cupSetup = new BaseCupSetup();
-                Roll = new Roll(cupSetup);
+                Roll = new Roll(_cupSetup);
             }
         }
     }

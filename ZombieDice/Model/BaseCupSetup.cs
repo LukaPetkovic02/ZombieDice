@@ -30,7 +30,7 @@ namespace ZombieDice.Model
 
     public class CupSetup
     {
-        public ICupSetup Build(bool santa, bool heroes)
+        public ICupSetup Build(bool heroes, bool santa)
         {
             ICupSetup setup = new BaseCupSetup();
             if (santa)
