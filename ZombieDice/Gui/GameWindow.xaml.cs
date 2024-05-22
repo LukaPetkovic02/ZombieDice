@@ -30,6 +30,8 @@ namespace ZombieDice.Gui
             List<RollResult> diceResult = player.Play();
             RollWindow rollWindow = new RollWindow(diceResult);
             rollWindow.ShowDialog();
+            //ovde poziv rescue metode iz Roll klase
+            player.Roll.Rescue();
             if (player.Lost())
             {
                 MessageBoxResult result = MessageBox.Show("You rolled 3 or more shotguns so your turn is over!", "Turn finished", MessageBoxButton.OK);
