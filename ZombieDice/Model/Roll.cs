@@ -90,8 +90,7 @@ namespace ZombieDice.Model
                 {
                     EnergyDrink = true;
                 }
-
-                MessageBox.Show($"{rollResult.Color} {rollResult.Value}");
+                
                 diceResults.Add(new RollResult(rollResult.Color, rollResult.Value, die));
             }
             return diceResults;
@@ -116,7 +115,7 @@ namespace ZombieDice.Model
             int index3 = Brains.FindIndex(x => x.Color is HottieColor);
             int index4 = Shotguns.FindIndex(x => x.Color is HunkColor);
             int index5 = DoubleShotguns.FindIndex(x => x.Color is HunkColor);
-            if (index3 > 0 && (index4 >= 0 || index5 >= 0))
+            if (index3 >= 0 && (index4 >= 0 || index5 >= 0))
             {
                 MessageBox.Show("Hunk saved hottie! Returning hottie brain to cup!");
                 Cup.ReturnDiceToCup(Brains[index3].Die);

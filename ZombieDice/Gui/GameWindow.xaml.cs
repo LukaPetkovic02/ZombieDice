@@ -1,6 +1,7 @@
 ﻿using DieSDK;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -23,7 +24,18 @@ namespace ZombieDice.Gui
             DataContext = _game;
             LabelPlayerName.Content = _game.Players[_game.IndexTurn].Name;
             LabelTotalBrains.Content = _game.Players[_game.IndexTurn].BrainCount;
-            ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/yellow_step.png", UriKind.RelativeOrAbsolute));
+            
+            //MessageBox.Show($"Current Directory: {Environment.CurrentDirectory}");
+            //MessageBox.Show($"Full Path: {fullPath}");
+
+            //if (File.Exists(fullPath))
+            //{
+            //    ImgSpecialItem.Source = new BitmapImage(new Uri(fullPath, UriKind.Absolute));
+            //}
+            //else
+            //{
+            //    MessageBox.Show($"Image not found at: {fullPath}");
+            //}
         }
 
         private void BtnRoll_Click(object sender, RoutedEventArgs e)
@@ -85,43 +97,60 @@ namespace ZombieDice.Gui
             EmptyImages();
             for (int i = 0; i < player.Roll.Brains.Count; i++)
             {
+                string relativePath = player.Roll.Brains[i].DisplayDie();
+                string fullPath = Path.GetFullPath(relativePath);
                 string imageName = $"ImgBrainDice{i+1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = new BitmapImage(new Uri(player.Roll.Brains[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+                image.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
 
             for (int i = 0; i < player.Roll.DoubleBrains.Count; i++)
             {
+                string relativePath = player.Roll.DoubleBrains[i].DisplayDie();
+                string fullPath = Path.GetFullPath(relativePath);
                 string imageName = $"ImgBrainDice{i + 1 + player.Roll.Brains.Count}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = new BitmapImage(new Uri(player.Roll.DoubleBrains[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+                image.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
             for (int i = 0; i < player.Roll.Runners.Count; i++)
             {
+                string relativePath = player.Roll.Runners[i].DisplayDie();
+                string fullPath = Path.GetFullPath(relativePath);
                 string imageName = $"ImgStepDice{i + 1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = new BitmapImage(new Uri(player.Roll.Runners[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+                image.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
             for (int i = 0; i < player.Roll.Shotguns.Count; i++)
             {
+                string relativePath = player.Roll.Shotguns[i].DisplayDie();
+                string fullPath = Path.GetFullPath(relativePath);
                 string imageName = $"ImgShotgunDice{i + 1}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = new BitmapImage(new Uri(player.Roll.Shotguns[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+                image.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
             for (int i = 0; i < player.Roll.DoubleShotguns.Count; i++)
             {
-                string imageName = $"ImgBrainDice{i + 1 + player.Roll.Shotguns.Count}";
+                string relativePath = player.Roll.DoubleShotguns[i].DisplayDie();
+                string fullPath = Path.GetFullPath(relativePath);
+                string imageName = $"ImgShotgunDice{i + 1 + player.Roll.Shotguns.Count}";
                 Image image = Grid.FindName(imageName) as Image;
-                image.Source = new BitmapImage(new Uri(player.Roll.DoubleShotguns[i].DisplayDie(), UriKind.RelativeOrAbsolute));
+                image.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
 
             if (player.Roll.EnergyDrink)
             {
-                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_energydrink.png", UriKind.RelativeOrAbsolute));
+                // C:\Users\lukap\Desktop\ZombieDice\DieSDK\images\santa_doublebrain.png
+                // C:\Users\lukap\Desktop\ZombieDice\ZombieDice\images\santa_doublebrain.png
+                // C:\Users\lukap\Desktop\ZombieDice\ZombieDice\images\green_step.png
+                string relativePath = "../../../images/santa_energydrink.png";
+                string fullPath = Path.GetFullPath(relativePath);
+                ImgSpecialItem.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
             else if (player.Roll.Helmet)
             {
-                ImgSpecialItem.Source = new BitmapImage(new Uri("../../../images/santa_helmet.png", UriKind.RelativeOrAbsolute));
+                string relativePath = "../../../images/santa_helmet.png";
+                string fullPath = Path.GetFullPath(relativePath);
+                ImgSpecialItem.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
         }
 
