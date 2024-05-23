@@ -57,7 +57,7 @@ namespace ZombieDice.Model
                     if (EnergyDrink && rollResult.Color == Colors.Green)
                     {
                         BrainCount++;
-                        Brains.Add(new RollResult(rollResult.Color, rollResult.Value, die));
+                        Brains.Add(new RollResult(rollResult.Color, Values.Brain, die));
                     }
                     else
                     {
