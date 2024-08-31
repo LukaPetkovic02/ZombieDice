@@ -35,17 +35,13 @@ namespace ZombieDice.Model
             dice.AddRange(DrawDice());
             List<RollResult> diceResult = Roll.RollDice(dice);
 
-            //
-            // update stanja playera (Take klasa) ili Turn?
-            //
-
             return diceResult;
         }
         
         public bool Lost()
         {
             int lives = Roll.Helmet ? 4 : 3;
-            return Roll.Shotguns.Count + Roll.DoubleShotguns.Count >= lives;
+            return Roll.Shotguns.Count + Roll.DoubleShotguns.Count*2 >= lives;
         }
 
         public List<Die> DrawDice()

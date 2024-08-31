@@ -1,5 +1,6 @@
 ﻿using DieSDK;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace ZombieDice.Model
@@ -96,13 +97,14 @@ namespace ZombieDice.Model
             return diceResults;
         }
 
-        public void Rescue() // will be called after each play in GameWindow.xaml.cs
+        public void Rescue()
         {
             // if Roll contains hunk double brain and hottie shotgun,
             // then return hunk die to cup
             int index1 = DoubleBrains.FindIndex(x => x.Color is HunkColor);
+            //DoubleBrains.Any(m=> m.Color is HunkColor);//
             int index2 = Shotguns.FindIndex(x => x.Color is HottieColor);
-            if (index1 >= 0 && index2 >= 0) // both exist
+            if (DoubleBrains.Any(m => m.Color is HunkColor) && index2 >= 0) // both exist
             {
                 MessageBox.Show("Hottie saved hunk! Hunk brains are returned to cup");
                 Cup.ReturnDiceToCup(DoubleBrains[index1].Die);
@@ -122,7 +124,6 @@ namespace ZombieDice.Model
                 Brains.RemoveAt(index3);
                 BrainCount--;
             }
-            // and remove die from Brains, and BrainCount-- or BrainCount-=2
         }
         // special case when there aren't enough dices in the cup
         // and the player wants to keep rolling

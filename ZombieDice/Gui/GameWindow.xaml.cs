@@ -24,18 +24,6 @@ namespace ZombieDice.Gui
             DataContext = _game;
             LabelPlayerName.Content = _game.Players[_game.IndexTurn].Name;
             LabelTotalBrains.Content = _game.Players[_game.IndexTurn].BrainCount;
-            
-            //MessageBox.Show($"Current Directory: {Environment.CurrentDirectory}");
-            //MessageBox.Show($"Full Path: {fullPath}");
-
-            //if (File.Exists(fullPath))
-            //{
-            //    ImgSpecialItem.Source = new BitmapImage(new Uri(fullPath, UriKind.Absolute));
-            //}
-            //else
-            //{
-            //    MessageBox.Show($"Image not found at: {fullPath}");
-            //}
         }
 
         private void BtnRoll_Click(object sender, RoutedEventArgs e)
@@ -43,8 +31,8 @@ namespace ZombieDice.Gui
             List<RollResult> diceResult = player.Play();
             RollWindow rollWindow = new RollWindow(diceResult);
             rollWindow.ShowDialog();
-            //ovde poziv rescue metode iz Roll klase
             player.Roll.Rescue();
+
             if (player.Lost())
             {
                 MessageBoxResult result = MessageBox.Show("You rolled 3 or more shotguns so your turn is over!", "Turn finished", MessageBoxButton.OK);
@@ -139,9 +127,6 @@ namespace ZombieDice.Gui
 
             if (player.Roll.EnergyDrink)
             {
-                // C:\Users\lukap\Desktop\ZombieDice\DieSDK\images\santa_doublebrain.png
-                // C:\Users\lukap\Desktop\ZombieDice\ZombieDice\images\santa_doublebrain.png
-                // C:\Users\lukap\Desktop\ZombieDice\ZombieDice\images\green_step.png
                 string relativePath = "../../../images/santa_energydrink.png";
                 string fullPath = Path.GetFullPath(relativePath);
                 ImgSpecialItem.Source = new BitmapImage(new Uri(fullPath, UriKind.RelativeOrAbsolute));
@@ -169,25 +154,6 @@ namespace ZombieDice.Gui
                 Image image = Grid.FindName(imageName) as Image;
                 image.Source = null;
             }
-            //ImgStepDice1.Source = null;
-            //ImgStepDice2.Source = null;
-            //ImgStepDice3.Source = null;
-            //ImgBrainDice1.Source = null;
-            //ImgBrainDice2.Source = null;
-            //ImgBrainDice3.Source = null;
-            //ImgBrainDice4.Source = null;
-            //ImgBrainDice5.Source = null;
-            //ImgBrainDice6.Source = null;
-            //ImgBrainDice7.Source = null;
-            //ImgBrainDice8.Source = null;
-            //ImgBrainDice9.Source = null;
-            //ImgBrainDice10.Source = null;
-            //ImgBrainDice11.Source = null;
-            //ImgBrainDice12.Source = null;
-            //ImgBrainDice13.Source = null;
-            //ImgBrainDice14.Source = null;
-            //ImgBrainDice15.Source = null;
-            //ImgBrainDice16.Source = null;
         }
     }
 }
