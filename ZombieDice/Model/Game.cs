@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DieSDK;
 
 namespace ZombieDice.Model
 {
     public class Game
     {
         public int NumOfPlayers;
-        public List<Player> Players;
+        public List<Player> Players { get; set; }
         public int IndexTurn;
         public bool LastTurn;
+        public ICupSetup CupSetup;
 
-        public Game(int numOfPlayers)
+        public Game(int numOfPlayers, ICupSetup cupSetup)
         {
             Players = new List<Player>();
             IndexTurn = 0;
             NumOfPlayers = numOfPlayers;
             LastTurn = false;
+            CupSetup = cupSetup;
         }
 
         public bool NameExists(string name)
@@ -27,7 +27,7 @@ namespace ZombieDice.Model
         }
         public void AddPlayer(string name)
         {
-            Players.Add(new Player(name));
+            Players.Add(new Player(name, CupSetup));
         }
 
         public Player DetermineWinner()

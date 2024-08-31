@@ -1,11 +1,5 @@
-﻿using System;
+﻿using DieSDK;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using ZombieDice.Gui;
 
 namespace ZombieDice.Model
 {
@@ -16,11 +10,13 @@ namespace ZombieDice.Model
         public int BrainCount { get; set; }
 
         public Roll Roll;
-        public Player(string name)
+        private readonly ICupSetup _cupSetup;
+        public Player(string name, ICupSetup cupSetup)
         {
             Name = name;
             BrainCount = 0;
-            Roll = new Roll(new Cup());
+            _cupSetup = cupSetup;
+            Roll = new Roll(cupSetup);
         }
 
         public bool HasPlayerCollected13Brains()
@@ -28,29 +24,34 @@ namespace ZombieDice.Model
             return BrainCount + Roll.BrainCount >= 13;
         }
 
-        public void Play() // button click - take dice and roll
+        public List<RollResult> Play() // button click - take dice and roll
         {
-            List<Die> dice = Roll.Runners; // all runners dice from previous roll are thrown in the next roll
+            List<Die> dice = new List<Die>(); // all runners dice from previous roll are thrown in the next roll
+            foreach (RollResult rollResult in Roll.Runners)
+            {
+                dice.Add(rollResult.Die);
+            }
+            
             dice.AddRange(DrawDice());
+            List<RollResult> diceResult = Roll.RollDice(dice);
 
-            Roll.RollDice(dice);
-            //else if (HasPlayerCollected13Brains() && !lastTurn)
-            //{
-            //    MessageBox.Show("You have collected at least 13 brains!");
-            //}
+            return diceResult;
         }
-
+        
         public bool Lost()
         {
-            return Roll.Shotguns.Count >= 3;
+            int lives = Roll.Helmet ? 4 : 3;
+            return Roll.Shotguns.Count + Roll.DoubleShotguns.Count*2 >= lives;
         }
 
         public List<Die> DrawDice()
         {
             int diceToDraw = 3 - Roll.Runners.Count;
-            if (!Roll.EnoughDiceInCup(diceToDraw))
+            if (!Roll.Cup.EnoughDiceInCup(diceToDraw))
+            {
                 Roll.returnAllBrainsToCup();
-
+            }
+            
             return Roll.DrawDiceFromCup(diceToDraw);
         }
         public void StoreBrains()
@@ -58,7 +59,7 @@ namespace ZombieDice.Model
             if (!Lost())
             {
                 BrainCount += Roll.BrainCount;
-                Roll = new Roll(new Cup());
+                Roll = new Roll(_cupSetup);
             }
         }
     }

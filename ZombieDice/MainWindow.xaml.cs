@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DieSDK;
 using ZombieDice.Gui;
 using ZombieDice.Model;
 
@@ -22,7 +11,6 @@ namespace ZombieDice
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Game _game;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,8 +20,22 @@ namespace ZombieDice
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             int numOfPlayers = (int) ComboBoxNum.SelectedItem;
-            _game = new Game(numOfPlayers);
-            NameEntryWindow window = new NameEntryWindow(_game);
+            
+            bool heroes = false, santa = false;
+            if (CheckBoxHeroes.IsChecked == true)
+            {
+                heroes = true;
+            }
+
+            if (CheckBoxSanta.IsChecked == true)
+            {
+                santa = true;
+            }
+
+            CupSetup baseCupSetup = new CupSetup();
+            ICupSetup cupSetup = baseCupSetup.Build(heroes, santa);
+            Game game = new Game(numOfPlayers, cupSetup);
+            NameEntryWindow window = new NameEntryWindow(game);
             window.Show();
             Close();
         }

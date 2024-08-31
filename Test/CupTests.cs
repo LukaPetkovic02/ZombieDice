@@ -1,4 +1,6 @@
-﻿namespace Test
+﻿using DieSDK;
+
+namespace Test
 {
     [TestFixture]
     public class CupTests
@@ -6,19 +8,35 @@
         [Test]
         public void PickDie_CupNotEmpty_ReturnsDie()
         {
-            Cup cup = new Cup();
+            List<Die> dice = new List<Die>();
+            for (int i = 0; i < 6; i++)
+            {
+                dice.Add(new Die(Colors.Green,Values.Brain));
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                dice.Add(new Die(Colors.Yellow,Values.Brain));
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                dice.Add(new Die(Colors.Red,Values.Brain));
+            }
+
+            Cup cup = new Cup(dice);
 
             Die die = cup.PickDie();
 
             Assert.IsNotNull(die);
-            Assert.IsTrue(Enum.IsDefined(typeof(DIE_COLOR), die.Color));
+            Assert.IsTrue(die.Color is IColor);
         }
 
         [Test]
         public void PickDie_CupEmpty_ThrowsInvalidOperationException()
         {
-            Cup cup = new Cup();
-            cup.Dice.Clear();
+            List<Die> dice = new List<Die>();
+            Cup cup = new Cup(dice);
 
             Assert.Throws<InvalidOperationException>(() => cup.PickDie());
         }
@@ -26,12 +44,13 @@
         [Test]
         public void ReturnDiceToCup_AddsDieToCup()
         {
-            Cup cup = new Cup();
-            Die die = new Die(DIE_COLOR.GREEN);
+            List<Die> dice = new List<Die>();
+            Cup cup = new Cup(dice);
+            Die die = new Die(Colors.Green,Values.Brain);
 
             cup.ReturnDiceToCup(die);
 
-            Assert.Contains(die, cup.Dice);
+            Assert.Contains(die, cup.dice);
         }
     }
 }

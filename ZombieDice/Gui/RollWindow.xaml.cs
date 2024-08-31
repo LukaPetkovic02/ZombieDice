@@ -1,17 +1,9 @@
 ﻿using System;
+using DieSDK;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ZombieDice.Model;
+using System.IO;
 
 namespace ZombieDice.Gui
 {
@@ -20,12 +12,18 @@ namespace ZombieDice.Gui
     /// </summary>
     public partial class RollWindow : Window
     {
-        public RollWindow(List<Die> dice)
+        public RollWindow(List<RollResult> diceResults)
         {
             InitializeComponent();
-            Img1.Source = dice[0].DisplayDie().Source;
-            Img2.Source = dice[1].DisplayDie().Source;
-            Img3.Source = dice[2].DisplayDie().Source;
+            string relativePath1 = diceResults[0].DisplayDie();
+            string fullPath1 = Path.GetFullPath(relativePath1);
+            string relativePath2 = diceResults[1].DisplayDie();
+            string fullPath2 = Path.GetFullPath(relativePath2);
+            string relativePath3 = diceResults[2].DisplayDie();
+            string fullPath3 = Path.GetFullPath(relativePath3);
+            Img1.Source = new BitmapImage(new Uri(fullPath1,UriKind.RelativeOrAbsolute));
+            Img2.Source = new BitmapImage(new Uri(fullPath2, UriKind.RelativeOrAbsolute));
+            Img3.Source = new BitmapImage(new Uri(fullPath3, UriKind.RelativeOrAbsolute));
         }
     }
 }
